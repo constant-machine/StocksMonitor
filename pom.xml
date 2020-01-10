@@ -4,7 +4,7 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
-  <groupId>org.constantine</groupId>
+  <groupId>ru.constantine</groupId>
   <artifactId>StocksMonitor</artifactId>
   <version>1.0</version>
   <packaging>war</packaging>
@@ -26,6 +26,13 @@
       <version>4.11</version>
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>javax.servlet-api</artifactId>
+      <version>4.0.1</version>
+      <scope>provided</scope>
+    </dependency>
+
   </dependencies>
 
   <build>

@@ -23,7 +23,7 @@
 		<td>
 			<ul>
 				<%
-					List<Long> ids = request.getAttribute("ids");
+					List<Long> ids = (List<Long>) request.getAttribute("ids");
 
 					if ( ids != null && !ids.isEmpty() ) {
 						for (Long id : ids) {
@@ -39,7 +39,7 @@
 		<td>
 			<ul>
 				<%
-					List<String> names = request.getAttribute("names");
+					List<String> names = (List<String>) request.getAttribute("names");
 
 					if ( names != null && !names.isEmpty() ) {
 						for (String name : names) {
@@ -52,7 +52,7 @@
 		<td>
 			<ul>
 				<%
-					List<String> emitents = request.getAttribute("emitents");
+					List<String> emitents = (List<String>) request.getAttribute("emitents");
 
 					if ( emitents != null && !emitents.isEmpty() ) {
 						for (String emitent : emitents) {
@@ -65,10 +65,10 @@
 		<td>
 			<ul>
 				<%
-					List<Long> amounts = request.getAttribute("amounts");
+					List<Long> amounts = (List<Long>) request.getAttribute("amounts");
 
 					if ( amounts != null && !amounts.isEmpty() ) {
-						for (String amount : amounts) {
+						for (Long amount : amounts) {
 							out.println("<li>" + amount + "</li>");
 						}
 					}
@@ -78,10 +78,10 @@
 		<td>
 			<ul>
 				<%
-					List<BigDecimal> costs = request.getAttribute("costs");
+					List<BigDecimal> costs = (List<BigDecimal>) request.getAttribute("costs");
 
 					if ( costs != null && !costs.isEmpty() ) {
-						for (String cost : costs) {
+						for (BigDecimal cost : costs) {
 							out.println("<li>" + cost + "</li>");
 						}
 					}

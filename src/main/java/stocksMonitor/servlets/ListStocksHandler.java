@@ -15,6 +15,8 @@ import java.util.List;
 
 public class ListStocksHandler extends HttpServlet {
 
+    private static final long serialVersionUID = 1L;
+
     public ListStocksHandler() {
     }
 

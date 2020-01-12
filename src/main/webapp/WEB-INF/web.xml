@@ -9,14 +9,14 @@
     <servlet-name>AddStock</servlet-name>
     <display-name>AddStock</display-name>
     <description></description>
-    <servlet-class>ru.constantine.stocksMonitor.servlets.AddStockHandler</servlet-class>
+    <servlet-class>stocksMonitor.servlets.AddStockHandler</servlet-class>
   </servlet>
 
   <servlet>
     <servlet-name>ListStocks</servlet-name>
     <display-name>ListStocks</display-name>
     <description></description>
-    <servlet-class>ru.constantine.stocksMonitor.servlets.ListStocksHandler</servlet-class>
+    <servlet-class>stocksMonitor.servlets.ListStocksHandler</servlet-class>
   </servlet>
 
   <servlet-mapping>

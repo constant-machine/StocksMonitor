@@ -1,9 +1,13 @@
 package stocksMonitor.entities;
 
 import java.math.BigDecimal;
+import javax.persistence.*;
 
+@Entity
 public class Stock {
 
+    @Id
+    @GeneratedValue
     private Long id;
     private String name;
     private String emitent;

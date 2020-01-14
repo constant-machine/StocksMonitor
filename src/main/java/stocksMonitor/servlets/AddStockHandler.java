@@ -3,6 +3,8 @@ package stocksMonitor.servlets;
 import stocksMonitor.entities.Stock;
 import stocksMonitor.model.StockProcessor;
 
+import javax.persistence.EntityManager;
+import javax.persistence.Persistence;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -14,8 +16,11 @@ import java.math.BigDecimal;
 public class AddStockHandler extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
+    private EntityManager entityManager;
 
     public AddStockHandler() {
+        entityManager = Persistence.createEntityManagerFactory(
+                "add_stocks_unit").createEntityManager();
     }
 
     @Override

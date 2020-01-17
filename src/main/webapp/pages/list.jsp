@@ -43,7 +43,7 @@
 
 					if ( names != null && !names.isEmpty() ) {
 						for (String name : names) {
-							out.println("<li>" + names + "</li>");
+							out.println("<li>" + name + "</li>");
 						}
 					}
 				%>

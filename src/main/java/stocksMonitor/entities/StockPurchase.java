@@ -4,32 +4,43 @@ import java.math.BigDecimal;
 import javax.persistence.*;
 
 @Entity
-public class Stock {
+@Table(name = "STOCKPURCHASES")
+public class StockPurchase {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "purchases_generator")
+    @SequenceGenerator(name = "purchases_generator", sequenceName = "PURCHASES_SEQUENCE", initialValue = 1, allocationSize = 1)
     private Long id;
     private String name;
     private String emitent;
     private Long amount;
     private BigDecimal cost;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id")
+    private User owner;
 
-    public Stock(String name, String emitent, Long amount, BigDecimal cost) {
+    public StockPurchase(String name, String emitent,
+                         Long amount, BigDecimal cost, User userName) {
         this.name = name;
         this.emitent = emitent;
         this.amount = amount;
         this.cost = cost;
+        this.owner = userName;
     }
 
     @Override
     public String toString() {
-        return "Stock{" +
+        return "StockPurchase{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", emitent='" + emitent + '\'' +
                 ", amount=" + amount +
                 ", cost=" + cost +
+                ", userName=" + owner +
                 '}';
+    }
+
+    public StockPurchase() {
     }
 
     public Long getId() {
@@ -70,5 +81,13 @@ public class Stock {
 
     public void setCost(BigDecimal cost) {
         this.cost = cost;
+    }
+
+    public User getOwner() {
+        return owner;
+    }
+
+    public void setOwner(User owner) {
+        this.owner = owner;
     }
 }

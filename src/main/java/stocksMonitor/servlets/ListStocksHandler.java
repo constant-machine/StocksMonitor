@@ -1,7 +1,7 @@
 package stocksMonitor.servlets;
 
-import stocksMonitor.entities.Stock;
-import stocksMonitor.model.StockProcessor;
+import stocksMonitor.entities.StockPurchase;
+import stocksMonitor.model.StockModel;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -15,17 +15,17 @@ import java.util.List;
 
 public class ListStocksHandler extends HttpServlet {
 
-    private static final long serialVersionUID = 1L;
+    private StockModel model;
 
     public ListStocksHandler() {
     }
 
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    protected void doGet(HttpServletRequest request,HttpServletResponse response)
             throws ServletException, IOException {
 
-        StockProcessor processor = StockProcessor.getInstance();
-        List<Stock> stocks = processor.list();
+        // TODO: replace id with logged in user_id
+        List<StockPurchase> stockPurchases = model.list(1L);
 
         List<Long> ids = new LinkedList<>();
         List<String> names = new LinkedList<>();
@@ -33,13 +33,13 @@ public class ListStocksHandler extends HttpServlet {
         List<Long> amounts = new LinkedList<>();
         List<BigDecimal> costs = new LinkedList<>();
 
-        for (Stock stock : stocks) {
-            if (!stocks.isEmpty()) {
-                ids.add(stock.getId());
-                names.add(stock.getName());
-                emitents.add(stock.getEmitent());
-                amounts.add(stock.getAmount());
-                costs.add(stock.getCost());
+        for (StockPurchase stockPurchase : stockPurchases) {
+            if (!stockPurchases.isEmpty()) {
+                ids.add(stockPurchase.getId());
+                names.add(stockPurchase.getName());
+                emitents.add(stockPurchase.getEmitent());
+                amounts.add(stockPurchase.getAmount());
+                costs.add(stockPurchase.getCost());
             }
         }
 
@@ -58,5 +58,17 @@ public class ListStocksHandler extends HttpServlet {
             throws ServletException, IOException {
 
         doGet(request, response);
+    }
+
+    @Override
+    public void init() throws ServletException {
+        super.init();
+        model = new StockModel();
+    }
+
+    @Override
+    public void destroy() {
+        model.shutdown();
+        super.destroy();
     }
 }

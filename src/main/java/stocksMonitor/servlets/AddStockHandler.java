@@ -1,10 +1,9 @@
 package stocksMonitor.servlets;
 
-import stocksMonitor.entities.Stock;
-import stocksMonitor.model.StockProcessor;
+import stocksMonitor.entities.StockPurchase;
+import stocksMonitor.entities.User;
+import stocksMonitor.model.StockModel;
 
-import javax.persistence.EntityManager;
-import javax.persistence.Persistence;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -15,12 +14,10 @@ import java.math.BigDecimal;
 
 public class AddStockHandler extends HttpServlet {
 
-    private static final long serialVersionUID = 1L;
-    private EntityManager entityManager;
+    private StockModel model;
+    private User user;
 
     public AddStockHandler() {
-        entityManager = Persistence.createEntityManagerFactory(
-                "add_stocks_unit").createEntityManager();
     }
 
     @Override
@@ -39,13 +36,25 @@ public class AddStockHandler extends HttpServlet {
         String emitent = request.getParameter("emitent");
         Long amount = Long.valueOf(request.getParameter("amount"));
         BigDecimal cost = new BigDecimal(request.getParameter("cost"));
+        StockPurchase purchase = new StockPurchase(name, emitent, amount, cost, user);
 
-        Stock stock = new Stock(name, emitent, amount, cost);
+        model.add(purchase);
 
-        StockProcessor processor = StockProcessor.getInstance();
-        processor.add(stock);
-
-        request.setAttribute("stockInfo", stock.toString());
+        request.setAttribute("stockInfo", purchase.toString());
         doGet(request, response);
+    }
+
+    @Override
+    public void init() throws ServletException {
+        super.init();
+        model = new StockModel();
+        //TODO: replace with logged in user
+        user = new User("TestUser");
+    }
+
+    @Override
+    public void destroy() {
+        model.shutdown();
+        super.destroy();
     }
 }

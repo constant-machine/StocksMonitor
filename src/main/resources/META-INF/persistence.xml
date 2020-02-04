@@ -11,9 +11,6 @@
 
         <properties>
             <property name="javax.persistence.jdbc.driver" value="oracle.jdbc.OracleDriver" />
-            <property name="hibernate.connection.url" value="jdbc:oracle:thin:@localhost:1521/xe"/>
-            <property name="javax.persistence.jdbc.user" value="SYSTEM" />
-            <property name="javax.persistence.jdbc.password" value="test123" />
             <property name="hibernate.show_sql" value="true"/>
             <property name="hibernate.hbm2ddl.auto" value="update"/>
             <property name="hibernate.dialect" value="org.hibernate.dialect.Oracle8iDialect"/>

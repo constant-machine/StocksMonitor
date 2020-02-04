@@ -4,6 +4,7 @@ import stocksMonitor.entities.StockPurchase;
 import stocksMonitor.entities.User;
 import stocksMonitor.model.StockModel;
 
+import javax.naming.NamingException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -47,7 +48,11 @@ public class AddStockHandler extends HttpServlet {
     @Override
     public void init() throws ServletException {
         super.init();
-        model = new StockModel();
+        try {
+            model = new StockModel();
+        } catch (NamingException e) {
+            e.printStackTrace();
+        }
         //TODO: replace with logged in user
         user = new User("TestUser");
     }

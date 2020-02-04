@@ -2,11 +2,15 @@ package stocksMonitor.model;
 
 import stocksMonitor.entities.StockPurchase;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Properties;
 
 /**
  * Persists domain objects into db.
@@ -15,8 +19,13 @@ public class StockModel {
 
     private EntityManager entityManager;
 
-    public StockModel() {
-        EntityManagerFactory factory = Persistence.createEntityManagerFactory("stocks-persistence");
+    public StockModel() throws NamingException {
+        Context context = new InitialContext();
+        Properties properties = new Properties();
+        properties.setProperty("javax.persistence.jdbc.user", (String) context.lookup("db_user"));
+        properties.setProperty("javax.persistence.jdbc.password", (String) context.lookup("db_password"));
+        properties.setProperty("hibernate.connection.url", (String) context.lookup("db_url"));
+        EntityManagerFactory factory = Persistence.createEntityManagerFactory("stocks-persistence", properties);
         entityManager = factory.createEntityManager();
     }
 

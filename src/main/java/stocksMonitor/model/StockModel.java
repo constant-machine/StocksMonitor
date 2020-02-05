@@ -22,9 +22,9 @@ public class StockModel {
     public StockModel() throws NamingException {
         Context context = new InitialContext();
         Properties properties = new Properties();
-        properties.setProperty("javax.persistence.jdbc.user", (String) context.lookup("db_user"));
-        properties.setProperty("javax.persistence.jdbc.password", (String) context.lookup("db_password"));
-        properties.setProperty("hibernate.connection.url", (String) context.lookup("db_url"));
+        properties.setProperty("javax.persistence.jdbc.user", (String) context.lookup("java:comp/env/db_user"));
+        properties.setProperty("javax.persistence.jdbc.password", (String) context.lookup("java:comp/env/db_password"));
+        properties.setProperty("hibernate.connection.url", (String) context.lookup("java:comp/env/db_url"));
         EntityManagerFactory factory = Persistence.createEntityManagerFactory("stocks-persistence", properties);
         entityManager = factory.createEntityManager();
     }
